@@ -1,0 +1,20 @@
+<div>
+  </div>
+  <form #signInForm="ngForm" (ngSubmit)="signInForm.valid && onSubmit(signInForm)">
+    <input type="text" name="email" #email="ngModel" [(ngModel)]="model.email" placeholder="Email" required
+      [ngClass]="{'invalid-textbox' :signInForm.submitted && !email.valid }">
+    <div *ngIf="signInForm.submitted && email.errors?.pattern">
+      <label class="validation-message">Invalid email address.</label>
+    </div>
+    <input type="password" name="parola" #parola="ngModel" [(ngModel)]="model.parola" placeholder="Sifre" required minlength="4"
+      [ngClass]="{'invalid-textbox' :signInForm.submitted && !parola.valid }">
+    <div *ngIf="signInForm.submitted && parola.errors?.minlength">
+      <label class="validation-message">Minimum 4 characters.</label>
+    </div>
+    <input type="submit" value="Giris">
+  </form>
+  <!-- Error message -->
+<div class="alert" *ngIf="ErrorMessages">
+    {{ErrorMessages}}
+
+  </div>

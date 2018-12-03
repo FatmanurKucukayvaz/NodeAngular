@@ -1,0 +1,34 @@
+<form #signUpForm="ngForm" (ngSubmit)="signUpForm.valid && onSubmit(signUpForm)">
+  <input type="text" #isim="ngModel" [(ngModel)]="kullaniciService.selectedUser.isim" name="isim" placeholder="Ad Soyad"
+  required  [ngClass]="{'invalid-textbox' :signUpForm.submitted && !isim.valid }">
+  <div *ngIf="signUpForm.submitted && !isim.valid">
+    <label class="validation-message">Gerekli.</label>
+  </div>
+  <input type="text" #email="ngModel" [(ngModel)]="kullaniciService.selectedUser.email" name="email" placeholder="Email"
+  required  [ngClass]="{'invalid-textbox' :signUpForm.submitted && !email.valid }">
+  <div *ngIf="signUpForm.submitted && email.errors">
+    <label *ngIf="email.errors.required" class="validation-message">Gerekli.</label>
+  </div>
+
+  <input type="text" #tel="ngModel" [(ngModel)]="kullaniciService.selectedUser.tel" name="tel" placeholder="Tel No"
+  required  [ngClass]="{'invalid-textbox' :signUpForm.submitted && !tel.valid }">
+  <div *ngIf="signUpForm.submitted && !tel.valid">
+    <label class="validation-message">Gerekli.</label>
+  </div>
+
+  <input type="password" #parola="ngModel" [(ngModel)]="kullaniciService.selectedUser.parola" name="parola" placeholder="Parola" required [ngClass]="{'invalid-textbox' :signUpForm.submitted && !parola.valid }">
+  <div *ngIf="signUpForm.submitted && parola.errors">
+    <label *ngIf="parola.errors.required" class="validation-message">Gerekli.</label>
+  </div>
+  <input type="submit" value="Kaydol">
+</form>
+
+<!-- Success message -->
+<div class="success" *ngIf="SucessMessage">
+  Saved successfully
+</div>
+
+<!-- Error message -->
+<div class="alert" *ngIf="ErrorMessages">
+  {{ErrorMessages}}
+</div>
